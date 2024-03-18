@@ -1,0 +1,21 @@
+  variables:
+    GIT_SSL_NO_VERIFY: 'true'
+    GIT_DEPTH: 0
+
+  stages:
+    - qa
+
+  test1:
+    stage: qa
+    tags:
+      - qa
+    rules:
+      - when: always
+    image: 'from_infra.com'
+    script:
+      - /bin/bash mvnw
+    artifacts:
+      when: always
+      paths:
+        - $CI_PROJECT_DIR/cucumber-reports.tar.gz
+      expire_in: 1 day
